@@ -471,6 +471,1209 @@ img {
 }
 
 /* ==========================================================================
+   PT TTSS - DIGITAL MARITIME HUB DESIGN SYSTEM (COMPLETE & RESPONSIVE)
+   ========================================================================== */
+
+/* 1. Global Reset & Variables inside Dashboard Scope */
+.ttss-dashboard-wrapper {
+    --ttss-bg-main: #060b13;
+    --ttss-bg-card: #0d1527;
+    --ttss-bg-field: #14213d;
+    --ttss-border-color: rgba(255, 255, 255, 0.06);
+    
+    /* Neon Accents */
+    --ttss-neon-cyan: #00f2fe;
+    --ttss-neon-blue: #0072ff;
+    --ttss-neon-purple: #b100ff;
+    --ttss-neon-green: #00ff87;
+    --ttss-neon-orange: #ff9f43;
+
+    /* Typography Colors */
+    --ttss-tx-main: #ffffff;
+    --ttss-tx-muted: #8fa0dd;
+    --ttss-tx-ghost: #546594;
+
+    background-color: var(--ttss-bg-main);
+    color: var(--ttss-tx-main);
+    font-family: 'Plus Jakarta Sans', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    padding: 60px 20px;
+    position: relative;
+    overflow: hidden;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+/* Ensure box-sizing for all child elements */
+.ttss-dashboard-wrapper *, 
+.ttss-dashboard-wrapper *::before, 
+.ttss-dashboard-wrapper *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* 2. Ambient Background Glows (Dekorasi Canggih Background) */
+.ttss-ambient-glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    filter: blur(150px);
+    opacity: 0.15;
+    z-index: 0;
+    pointer-events: none;
+}
+.ttss-ambient-glow--1 {
+    top: -100px;
+    left: -50px;
+    background: var(--ttss-neon-cyan);
+}
+.ttss-ambient-glow--2 {
+    bottom: -100px;
+    right: -50px;
+    background: var(--ttss-neon-purple);
+}
+
+/* 3. Layout Container */
+.ttss-inner-container {
+    max-width: 1280px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+}
+
+/* 4. Header Section */
+.ttss-dashboard-header {
+    text-align: center;
+    margin-bottom: 50px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.ttss-sub-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 242, 254, 0.08);
+    border: 1px solid rgba(0, 242, 254, 0.2);
+    color: var(--ttss-neon-cyan);
+    padding: 6px 16px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+}
+
+.ttss-icon-spin {
+    animation: ttss-spin 4s linear infinite;
+}
+
+@keyframes ttss-spin {
+    100% { transform: rotate(300deg); }
+}
+
+.ttss-main-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    line-height: 1.3;
+    margin-bottom: 12px;
+    background: linear-gradient(135deg, #fff 0%, var(--ttss-tx-muted) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.ttss-header-desc {
+    color: var(--ttss-tx-muted);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* 5. Modern Responsive Grid System */
+.ttss-dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 13fr);
+    gap: 24px;
+    align-items: stretch;
+}
+
+/* Responsive Breakpoints */
+@media (max-width: 1024px) {
+    .ttss-dashboard-grid {
+        grid-template-columns: repeat(2, 1fr); /* Layar tablet: 2 kolom */
+    }
+}
+
+@media (max-width: 768px) {
+    .ttss-dashboard-wrapper {
+        padding: 40px 16px;
+    }
+    .ttss-dashboard-grid {
+        grid-template-columns: 1fr; /* Layar HP: 1 kolom penuh */
+    }
+    .ttss-main-title {
+        font-size: 1.8rem;
+    }
+}
+
+/* 6. Premium Glassmorphism Card Architecture */
+.ttss-card {
+    background: var(--ttss-bg-card);
+    border: 1px solid var(--ttss-border-color);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.ttss-card:hover {
+    transform: translateY(-5px);
+    border-color: rgba(0, 242, 254, 0.2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 242, 254, 0.03);
+}
+
+.ttss-card-body {
+    padding: 28px;
+    flex-grow: 1;
+}
+
+.ttss-card-footer {
+    padding: 0 28px 28px 28px;
+}
+
+/* Decorative Card Icons */
+.ttss-icon-indicator {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+}
+
+.ttss-icon-indicator--cyan {
+    background: rgba(0, 242, 254, 0.1);
+    color: var(--ttss-neon-cyan);
+}
+.ttss-icon-indicator--blue {
+    background: rgba(0, 114, 255, 0.1);
+    color: var(--ttss-neon-blue);
+}
+.ttss-icon-indicator--purple {
+    background: rgba(177, 0, 255, 0.1);
+    color: var(--ttss-neon-purple);
+}
+
+.ttss-card-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--ttss-tx-main);
+}
+
+.ttss-card-text {
+    font-size: 0.85rem;
+    color: var(--ttss-tx-muted);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+/* 7. Form Controls & Inputs */
+.ttss-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.ttss-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ttss-form-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--ttss-tx-ghost);
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.ttss-form-select, 
+.ttss-form-input {
+    width: 100%;
+    background: var(--ttss-bg-field);
+    border: 1px solid var(--ttss-border-color);
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: var(--ttss-tx-main);
+    font-size: 0.9rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.ttss-form-select:focus, 
+.ttss-form-input:focus {
+    border-color: rgba(0, 242, 254, 0.4);
+    box-shadow: 0 0 10px rgba(0, 242, 254, 0.1);
+}
+
+/* Special Input Group for Unit Integration (KL) */
+.ttss-input-unit-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.ttss-form-input-unit {
+    position: absolute;
+    right: 16px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ttss-tx-ghost);
+    pointer-events: none;
+}
+
+.ttss-input-unit-container .ttss-form-input {
+    padding-right: 50px;
+}
+
+/* 8. Component: Live Multi-Currency Switcher */
+.ttss-card-header-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+.ttss-card-header-flex .ttss-icon-indicator {
+    margin-bottom: 0;
+}
+
+.ttss-currency-toggle {
+    display: flex;
+    background: rgba(20, 33, 61, 0.6);
+    padding: 4px;
+    border-radius: 10px;
+    border: 1px solid var(--ttss-border-color);
+}
+
+.ttss-currency-btn {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: var(--ttss-tx-ghost);
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 7px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.ttss-currency-btn--active {
+    background: rgba(0, 242, 254, 0.12);
+    color: var(--ttss-neon-cyan);
+}
+
+/* 9. Component: Search Bar & Live Real-time List */
+.ttss-search-wrapper {
+    position: relative;
+    margin: 18px 0;
+}
+
+.ttss-search-icon {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--ttss-tx-ghost);
+    font-size: 1.1rem;
+}
+
+.ttss-form-input--search {
+    padding-left: 42px;
+    font-size: 0.85rem;
+    background: rgba(20, 33, 61, 0.4);
+}
+
+.ttss-status-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding-right: 4px;
+}
+
+/* Custom Scrollbar for Fleet List */
+.ttss-status-list::-webkit-scrollbar {
+    width: 4px;
+}
+.ttss-status-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+.ttss-status-list::-webkit-scrollbar-thumb {
+    background: var(--ttss-border-color);
+    border-radius: 10px;
+}
+
+.ttss-status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--ttss-border-color);
+    padding: 12px 14px;
+    border-radius: 12px;
+    transition: background 0.2s;
+}
+.ttss-status-row:hover {
+    background: rgba(255, 255, 255, 0.04);
+}
+
+.ttss-vessel-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.ttss-status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--ttss-neon-green);
+    display: inline-block;
+}
+.ttss-status-dot--orange {
+    background: var(--ttss-neon-orange);
+}
+
+/* Status Pulse Effect for Available Ships */
+.ttss-pulse-effect {
+    box-shadow: 0 0 0 0 rgba(0, 255, 135, 0.4);
+    animation: ttss-pulse 2s infinite;
+}
+
+@keyframes ttss-pulse {
+    70% { box-shadow: 0 0 0 8px rgba(0, 255, 135, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(0, 255, 135, 0); }
+}
+
+.ttss-vessel-name {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ttss-tx-main);
+}
+
+.ttss-vessel-specs {
+    font-size: 0.75rem;
+    color: var(--ttss-tx-ghost);
+}
+
+.ttss-row-badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-transform: uppercase;
+}
+.ttss-row-badge--green {
+    background: rgba(0, 255, 137, 0.08);
+    color: var(--ttss-neon-green);
+}
+.ttss-row-badge--orange {
+    background: rgba(255, 159, 67, 0.08);
+    color: var(--ttss-neon-orange);
+}
+
+/* Empty Search State Feedback */
+.ttss-empty-search-feedback {
+    text-align: center;
+    padding: 24px;
+    font-size: 0.8rem;
+    color: var(--ttss-tx-ghost);
+    border: 1px dashed var(--ttss-border-color);
+    border-radius: 12px;
+}
+
+/* 10. Progress Bar Utilities */
+.ttss-progress-card {
+    background: rgba(20, 33, 61, 0.5);
+    border: 1px solid var(--ttss-border-color);
+    padding: 16px;
+    border-radius: 14px;
+}
+
+.ttss-progress-info {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--ttss-tx-muted);
+}
+.ttss-progress-val {
+    color: var(--ttss-neon-blue);
+    font-weight: 700;
+}
+
+.ttss-progress-track {
+    width: 100%;
+    height: 6px;
+    background: var(--ttss-bg-field);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.ttss-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--ttss-neon-blue), var(--ttss-neon-cyan));
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 114, 255, 0.5);
+}
+
+/* 11. Informative Notice Box */
+.ttss-notice-box {
+    display: flex;
+    gap: 12px;
+    background: rgba(177, 0, 255, 0.04);
+    border: 1px solid rgba(177, 0, 255, 0.15);
+    padding: 14px;
+    border-radius: 12px;
+    margin-top: 18px;
+    align-items: flex-start;
+}
+
+.ttss-notice-box i {
+    color: var(--ttss-neon-purple);
+    font-size: 1.1rem;
+    margin-top: 2px;
+}
+
+.ttss-notice-box span {
+    font-size: 0.75rem;
+    color: var(--ttss-tx-muted);
+    line-height: 1.4;
+}
+
+/* 12. Dynamic Action Outputs (Kalkulator Result) */
+.ttss-result-container {
+    background: linear-gradient(135deg, rgba(20, 33, 61, 0.8) 0%, rgba(13, 21, 39, 0.8) 100%);
+    border: 1px solid rgba(0, 242, 254, 0.15);
+    padding: 16px;
+    border-radius: 14px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.ttss-result-title {
+    font-size: 0.65rem;
+    font-weight: 800;
+    color: var(--ttss-neon-cyan);
+    letter-spacing: 1px;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.ttss-result-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ttss-result-amount {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--ttss-tx-main);
+    font-variant-numeric: tabular-nums;
+}
+
+.ttss-tax-badge {
+    font-size: 0.65rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, 0.06);
+    padding: 4px 8px;
+    border-radius: 4px;
+    color: var(--ttss-tx-ghost);
+}
+
+/* 13. Enterprise Button Components Group */
+.ttss-btn {
+    width: 100%;
+    padding: 14px 20px;
+    border-radius: 12px;
+    font-family: inherit;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+/* Variant 1: Neon Cyan Accent Button */
+.ttss-btn--primary-neon {
+    background: linear-gradient(135deg, var(--ttss-neon-blue) 0%, var(--ttss-neon-cyan) 100%);
+    color: #030712;
+    box-shadow: 0 4px 15px rgba(0, 242, 254, 0.2);
+}
+.ttss-btn--primary-neon:hover {
+    box-shadow: 0 6px 20px rgba(0, 242, 254, 0.4);
+    transform: translateY(-1px);
+}
+
+/* Variant 2: Modern Icon Action Trigger (Download Mini Grid Button) */
+.ttss-btn-group-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.ttss-btn--icon-only {
+    width: 52px;
+    min-width: 52px;
+    height: 48px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--ttss-border-color);
+    color: var(--ttss-tx-muted);
+    padding: 0;
+}
+.ttss-btn--icon-only:hover {
+    background: rgba(0, 242, 254, 0.08);
+    color: var(--ttss-neon-cyan);
+    border-color: rgba(0, 242, 254, 0.3);
+}
+
+/* Variant 3: Secondary Subdued Border Accent */
+.ttss-btn--secondary-outline {
+    background: transparent;
+    border: 1px solid var(--ttss-border-color);
+    color: var(--ttss-tx-muted);
+}
+.ttss-btn--secondary-outline:hover {
+    background: rgba(255, 255, 255, 0.02);
+    color: var(--ttss-tx-main);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Variant 4: Purple Gradient (WhatsApp Integration) */
+.ttss-btn--purple-gradient {
+    background: linear-gradient(135deg, #7000ff 0%, var(--ttss-neon-purple) 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(177, 0, 255, 0.15);
+}
+.ttss-btn--purple-gradient:hover {
+    box-shadow: 0 6px 20px rgba(177, 0, 255, 0.35);
+    transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   TTSS MAIN FRAMEWORK INFRASTRUCTURE SYSTEMS
+   ========================================================================== */
+.ttss-fleet-intelligence-system {
+    --bg-space-core: #050811;
+    --bg-panel-dark: #0b111e;
+    --bg-element-dark: #141b2d;
+    --neon-cyan: #00d2ff;
+    --neon-green: #00ff87;
+    --neon-red: #ff4d4d;
+    --neon-orange: #ff9f43;
+    --text-light: #ffffff;
+    --text-muted: #8a99ad;
+    --grid-border: rgba(255, 255, 255, 0.04);
+    
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.ttss-mainframe-container {
+    background:#17193A;
+    border: 1px solid var(--grid-border);
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+}
+
+.ttss-mainframe-header {
+    border-bottom: 1px solid var(--grid-border);
+    padding-bottom: 20px;
+    margin-bottom: 28px;
+}
+.ttss-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.65rem;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: var(--neon-cyan);
+    background: rgba(0, 210, 255, 0.05);
+    padding: 6px 14px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 210, 255, 0.1);
+}
+.ttss-spin-icon {
+    animation: spinClockwise 4s linear infinite;
+}
+@keyframes spinClockwise { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+.ttss-mainframe-header h2 { color: var(--text-light); font-size: 1.6rem; font-weight: 700; margin: 12px 0 6px 0; }
+.ttss-mainframe-header p { color: var(--text-muted); font-size: 0.85rem; margin: 0; line-height: 1.5; }
+
+/* MAIN GRID SPLIT */
+.ttss-dashboard-grid {
+    display: grid;
+    grid-template-columns: 4.3fr 5.7fr;
+    gap: 28px;
+}
+@media (max-width: 1024px) {
+    .ttss-dashboard-grid { grid-template-columns: 1fr; }
+}
+
+.ttss-sticky-wrapper { position: sticky; top: 20px; }
+
+/* SISI KIRI: PANEL CONTROL & DOKUMEN */
+.ttss-action-btn {
+    background: var(--bg-element-dark);
+    border: 1px solid var(--grid-border);
+    color: var(--text-light);
+    padding: 10px 16px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    margin-bottom: 1rem;
+}
+.ttss-action-btn:hover:not(.disabled) {
+    background: #1e2942;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 10px rgba(0,210,255,0.2);
+}
+.ttss-action-btn.disabled { opacity: 0.2; cursor: not-allowed; }
+
+.ttss-instruction-box {
+    background: #0e1626;
+    border: 1px dashed rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 50px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+.ttss-radar-pulse { font-size: 2.5rem; color: var(--neon-cyan); margin-bottom: 16px; animation: radarPing 2s infinite; }
+@keyframes radarPing { 0% { transform: scale(0.9); opacity: 0.6; } 50% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(0.9); opacity: 0.6; } }
+
+.ttss-instruction-box h4 { color: var(--text-light); font-size: 1rem; margin: 0 0 8px 0; }
+.ttss-instruction-box p { color: var(--text-muted); font-size: 0.8rem; margin: 0; line-height: 1.6; }
+
+/* SHEET STYLE COPIED FROM USER SPEC DOCUMENT */
+.ttss-document-sheet {
+    background: #111a2e;
+    border: 1px solid var(--grid-border);
+    border-radius: 16px;
+    padding: 20px;
+    position: relative;
+    animation: slideUpDoc 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+@keyframes slideUpDoc { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+.ttss-doc-watermark {
+    position: absolute;
+    right: 20px;
+    bottom: 20px;
+    font-size: 4rem;
+    font-weight: 900;
+    color: rgba(255, 255, 255, 0.01);
+    pointer-events: none;
+    font-family: Arial, sans-serif;
+}
+
+.ttss-doc-header { margin-bottom: 18px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 14px; }
+.doc-tag { font-size: 0.6rem; font-weight: 800; padding: 3px 8px; border-radius: 4px; color: #000; text-transform: uppercase; letter-spacing: 0.5px; }
+
+#cell-bridge .doc-tag, .bg-cyan { background: var(--neon-cyan); }
+#cell-cargo .doc-tag, .bg-green { background: var(--neon-green); }
+#cell-engine .doc-tag, .bg-red { background: var(--neon-red); }
+
+#doc-comp-title { color: var(--text-light); font-size: 1.2rem; margin: 8px 0 4px 0; }
+.ttss-vessel-identity-lbl { font-size: 0.7rem; color: var(--text-muted); font-weight: 600; }
+.ttss-vessel-identity-lbl span { color: var(--neon-cyan); }
+
+.ttss-doc-body { max-height: 310px; overflow-y: auto; padding-right: 6px; }
+.ttss-doc-body::-webkit-scrollbar { width: 4px; }
+.ttss-doc-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
+
+.ttss-doc-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; }
+.ttss-doc-table tr { border-bottom: 1px solid rgba(255,255,255,0.02); transition: background 0.1s; }
+.ttss-doc-table tr:hover { background: rgba(255,255,255,0.01); }
+.ttss-doc-table td { padding: 10px 6px; color: var(--text-muted); }
+.ttss-doc-table td:last-child { text-align: right; color: var(--text-light); font-weight: 600; font-family: monospace; }
+
+/* ==========================================================================
+   SISI KANAN: ENGINE KANVAS VIEWPORT & FLIGHT SPACE MATRIX 3D
+   ========================================================================== */
+.ttss-viewport-and-dock-side { display: flex; flex-direction: column; gap: 20px; }
+
+.ttss-canvas-container {
+    background: var(--bg-space-core);
+    border: 1px solid var(--grid-border);
+    border-radius: 20px;
+    aspect-ratio: 1.4 / 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 20px;
+    box-sizing: border-box;
+    perspective: 1000px; /* Sudut Kelengkapan Kedalaman Lensa Kamera */
+}
+
+.ttss-canvas-telemetry { display: flex; justify-content: space-between; font-size: 0.65rem; font-family: monospace; font-weight: 700; color: rgba(255,255,255,0.25); }
+.txt-neon-green { color: var(--neon-green); text-shadow: 0 0 4px rgba(0,255,135,0.3); }
+.txt-neon-blue { color: var(--neon-cyan); text-shadow: 0 0 4px rgba(0,210,255,0.3); }
+
+/* Matriks Ruang Kamera Orbit */
+.ttss-orbit-space {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(60deg) rotateZ(-45deg) translate3d(0,0,0);
+    transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Kotak Tubuh Struktur Lambung Utama */
+.ttss-vessel-structural-hull {
+    position: absolute;
+    width: 320px;
+    height: 60px;
+    top: 38%;
+    left: 8%;
+    transform-style: preserve-3d;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.ttss-structural-cell {
+    position: absolute;
+    transform-style: preserve-3d;
+    cursor: pointer;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.cell-tooltip {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%) rotateZ(45deg) rotateX(-60deg);
+    font-size: 0.5rem;
+    font-weight: 800;
+    font-family: monospace;
+    background: #000;
+    color: var(--text-light);
+    padding: 2px 6px;
+    border-radius: 3px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+}
+.ttss-structural-cell:hover .cell-tooltip { opacity: 0.8; }
+
+/* 3D POLYGON GENERATOR CUBE */
+.box-mesh-3d { position: relative; width: 100%; height: 100%; transform-style: preserve-3d; }
+.mesh-face { position: absolute; border: 1px solid rgba(255,255,255,0.12); transition: all 0.3s; }
+
+/* KALIBRASI SKALA BLOK DARI BURITAN SAMPAI HALUAN */
+/* 1. Cell Bridge (Buritan Belakang) */
+.cell-bridge { width: 50px; height: 50px; top: 5px; left: 5px; }
+.cell-bridge .mesh-face { width: 50px; height: 50px; background: rgba(0, 210, 255, 0.12); border-color: var(--neon-cyan); }
+.cell-bridge .m-top { transform: translateZ(40px); }
+.cell-bridge .m-front { height: 40px; transform: rotateX(-90deg) translateY(20px); transform-origin: bottom center; }
+.cell-bridge .m-side { height: 40px; transform: rotateY(90deg) translateX(20px); transform-origin: right center; }
+
+/* 2. Cell Cargo (Kompartemen Tangki Tengah) */
+.cell-cargo { width: 170px; height: 50px; top: 5px; left: 60px; }
+.cell-cargo .mesh-face { width: 170px; height: 50px; background: rgba(0, 255, 135, 0.12); border-color: var(--neon-green); }
+.cell-cargo .m-top { transform: translateZ(25px); }
+.cell-cargo .m-front { height: 25px; transform: rotateX(-90deg) translateY(12.5px); transform-origin: bottom center; }
+.cell-cargo .m-side { height: 25px; transform: rotateY(90deg) translateX(12.5px); transform-origin: right center; }
+
+/* 3. Cell Engine (Kamar Mesin Depan) */
+.cell-engine { width: 75px; height: 50px; top: 5px; left: 235px; }
+.cell-engine .mesh-face { width: 75px; height: 50px; background: rgba(255, 77, 77, 0.12); border-color: var(--neon-red); }
+.cell-engine .m-top { transform: translateZ(25px); }
+.cell-engine .m-front { height: 25px; transform: rotateX(-90deg) translateY(12.5px); transform-origin: bottom center; }
+.cell-engine .m-side { height: 25px; transform: rotateY(90deg) translateX(12.5px); transform-origin: right center; }
+
+/* FOCUSED & EXPLODED FILTER STATE */
+.ttss-structural-cell.fade-isolate { opacity: 0.1; pointer-events: none; }
+.ttss-structural-cell.focused-mesh { transform: translateZ(22px); }
+.ttss-structural-cell.focused-mesh .mesh-face { background-image: linear-gradient(rgba(255,255,255,0.15), transparent); }
+
+.ttss-canvas-legends { display: flex; gap: 14px; }
+.lg-node { display: flex; align-items: center; gap: 6px; font-size: 0.65rem; color: var(--text-muted); }
+.lg-square { width: 8px; height: 8px; border-radius: 2px; }
+
+/* ==========================================================================
+   TACTICAL NAV DOCK (4 FLUID CAP TOMBOL BAWAH)
+   ========================================================================== */
+.ttss-tactical-dock { background: #0c1222; border: 1px solid var(--grid-border); border-radius: 16px; padding: 14px; }
+.dock-label { font-size: 0.65rem; font-weight: 800; color: var(--text-muted); margin-bottom: 10px; letter-spacing: 0.5px; }
+.dock-row-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+
+@media (max-width: 768px) {
+    .dock-row-grid { grid-template-columns: 1fr; } /* Responsif tumpuk satu kolom di layar smartphone */
+}
+
+.dock-item-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: var(--bg-element-dark);
+    border: 1px solid var(--grid-border);
+    padding: 10px 14px;
+    border-radius: 10px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.dock-item-btn:hover { background: #1b253d; border-color: rgba(0,210,255,0.3); }
+.dock-item-btn.active { background: rgba(0,210,255,0.04); border-color: var(--neon-cyan); box-shadow: inset 0 0 10px rgba(0,210,255,0.05); }
+
+.dock-status-light { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; }
+.dock-status-light.s-ready { background: var(--neon-green); box-shadow: 0 0 6px var(--neon-green); }
+.dock-status-light.s-booked { background: var(--neon-red); box-shadow: 0 0 6px var(--neon-red); }
+
+.dock-item-meta { display: flex; flex-direction: column; flex-grow: 1; }
+.dock-item-meta strong { color: var(--text-light); font-size: 0.8rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.dock-item-meta span { color: var(--text-muted); font-size: 0.65rem; margin-top: 1px; }
+
+.dock-arrow { font-size: 1rem; color: rgba(255,255,255,0.15); transition: transform 0.2s; }
+.dock-item-btn.active .dock-arrow { color: var(--neon-cyan); transform: translateX(2px); }
+
+.hidden { display: none !important; }
+
+/* ==========================================================================
+   3D ISO-DECK CARGO SIMULATOR DESIGN SYSTEM
+   ========================================================================== */
+
+.ttss-iso-container {
+    --bg-dark-card: #0d1527;
+    --bg-dark-field: #14213d;
+    --border-glow: rgba(255, 255, 255, 0.06);
+    --neon-cyan: #00d2ff;
+    --neon-amber: #ff9f43;
+    --text-white: #ffffff;
+    --text-muted: #8fa0dd;
+    --text-ghost: #546594;
+
+    width: 100%;
+    margin: 20px 0;
+    box-sizing: border-box;
+}
+
+.ttss-iso-card {
+    background: var(--bg-dark-card);
+    border: 1px solid var(--border-glow);
+    padding: 32px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.ttss-iso-split-layout {
+    display: grid;
+    grid-template-columns: 4.5fr 5.5fr;
+    gap: 40px;
+    align-items: center;
+}
+
+@media (max-width: 1024px) {
+    .ttss-iso-split-layout {
+        grid-template-columns: 1fr; /* Responsif tumpuk satu kolom di mobile */
+        gap: 50px;
+    }
+}
+
+/* Control Side Elements */
+.ttss-iso-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 210, 255, 0.08);
+    border: 1px solid rgba(0, 210, 255, 0.2);
+    color: var(--neon-cyan);
+    padding: 6px 14px;
+    border-radius: 30px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.ttss-pulse-icon {
+    animation: ttss-iso-pulse 2s infinite;
+}
+@keyframes ttss-iso-pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+}
+
+.ttss-iso-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 8px;
+}
+
+.ttss-iso-desc {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 24px;
+}
+
+.ttss-iso-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.ttss-iso-input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.ttss-iso-label {
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--text-ghost);
+    letter-spacing: 0.5px;
+}
+
+.ttss-iso-select {
+    width: 100%;
+    background: var(--bg-dark-field);
+    border: 1px solid var(--border-glow);
+    padding: 14px 16px;
+    border-radius: 12px;
+    color: var(--text-white);
+    font-size: 0.9rem;
+    outline: none;
+}
+
+.ttss-iso-slider-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ttss-iso-pct-badge {
+    background: var(--neon-amber);
+    color: #000000;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 6px;
+}
+
+.ttss-iso-slider {
+    width: 100%;
+    -webkit-appearance: none;
+    background: var(--bg-dark-field);
+    height: 6px;
+    border-radius: 10px;
+    outline: none;
+}
+.ttss-iso-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--neon-cyan);
+    cursor: pointer;
+    box-shadow: 0 0 10px var(--neon-cyan);
+}
+
+/* Stats Metric Grid */
+.ttss-iso-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+@media (max-width: 480px) {
+    .ttss-iso-stats-grid {
+        grid-template-columns: 1fr; /* Kolom tunggal di layar HP kecil */
+    }
+}
+
+.ttss-iso-stat-item {
+    background: rgba(255,255,255,0.02);
+    border: 1px solid var(--border-glow);
+    padding: 12px;
+    border-radius: 10px;
+}
+
+.ttss-stat-lbl {
+    display: block;
+    font-size: 0.55rem;
+    color: var(--text-ghost);
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.ttss-iso-stat-item strong {
+    color: var(--text-white);
+    font-size: 0.9rem;
+    font-family: monospace;
+}
+.ttss-iso-stat-item .status-green {
+    color: #00ff87;
+}
+
+/* ==========================================================================
+   SISI KANAN: ARSITEKTUR KANVAS 3D ISOMETRIK ENGINE MURNI CSS
+   ========================================================================== */
+.ttss-iso-visual-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 40px 0;
+}
+
+/* Container Ruang Proyeksi 3D */
+.ttss-iso-scene {
+    position: relative;
+    width: 100%;
+    max-width: 360px;
+    aspect-ratio: 1 / 1;
+    /* Efek Matriks Sudut Pandang Isometrik Kapal Laut */
+    transform: rotateX(60deg) rotateZ(-45deg);
+    transform-style: preserve-3d;
+    perspective: 1000px;
+}
+
+/* Rangka Lambung Kapal */
+.ttss-iso-vessel-hull {
+    position: absolute;
+    width: 90%;
+    height: 50%;
+    top: 25%;
+    left: 5%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 2px dashed rgba(255, 255, 255, 0.2);
+    transform-style: preserve-3d;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 10px;
+    box-sizing: border-box;
+}
+
+/* Blok Kompartemen Tangki Individual */
+.ttss-iso-tank-block {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    transform-style: preserve-3d;
+}
+
+.ttss-tank-label-3d {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%) rotateZ(45deg) rotateX(-60deg); /* Supaya teks label tegak menghadap user */
+    color: var(--text-muted);
+    font-size: 0.6rem;
+    font-weight: 800;
+    font-family: monospace;
+    white-space: nowrap;
+}
+
+/* RANGKA KAWAT TRANSPARAN TANGKI (WIREFRAME CONTAINER) */
+.ttss-cube-wireframe {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+}
+
+.ttss-cube-wireframe .face-wire {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+}
+.ttss-cube-wireframe .top { transform: translateZ(80px); }
+.ttss-cube-wireframe .front { transform: rotateX(-90deg) translateY(40px); transform-origin: bottom center; }
+.ttss-cube-wireframe .side { transform: rotateY(90deg) translateX(40px); transform-origin: right center; }
+
+/* MASSA VOLUME CAIRAN MINYAK (FLUID CORE CUBE) */
+.ttss-cube-fluid {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    bottom: 0;
+    transform: scale(0.98); /* Diperkecil tipis agar pas masuk di dalam wireframe */
+    transition: all 0.5s ease-out; /* Transisi naik-turun cairan halus */
+}
+
+.ttss-cube-fluid .face {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, rgba(255, 159, 67, 0.5), rgba(214, 114, 19, 0.6));
+    border: 1px solid rgba(255, 159, 67, 0.4);
+}
+
+/* Kalkulasi Sumbu 3D Sisi Kubus Cairan Mengikuti Variabel Slider */
+.ttss-cube-fluid .top { 
+    transform: translateZ(calc(80px * (var(--fluid-height) / 100))); 
+    background: rgba(255, 159, 67, 0.8);
+    box-shadow: 0 0 15px rgba(255, 159, 67, 0.4);
+}
+.ttss-cube-fluid .front { 
+    height: calc(80px * (var(--fluid-height) / 100));
+    transform: rotateX(-90deg) translateY(40px); 
+    transform-origin: bottom center; 
+}
+.ttss-cube-fluid .side { 
+    height: calc(80px * (var(--fluid-height) / 100));
+    transform: rotateY(90deg) translateX(40px); 
+    transform-origin: right center; 
+}
+
+/* Label Teks Sumbu Deck Kapal */
+.ttss-deck-axis {
+    position: absolute;
+    font-size: 0.6rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.15);
+    letter-spacing: 1px;
+    font-family: sans-serif;
+}
+.axis-bow { top: 10%; left: 0; transform: rotateZ(45deg); }
+.axis-stern { bottom: 10%; right: 0; transform: rotateZ(45deg); }
+
+/* ==========================================================================
    CORE SERVICES SECTION
    ========================================================================== */
 .services-grid {
