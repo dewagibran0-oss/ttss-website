@@ -147,6 +147,164 @@
     </section>
     <!-- CORE SERVICES END -->
 
+    <section class="ttss-fleet-intelligence-system">
+    <div class="ttss-mainframe-container">
+        
+        <!-- TOP CONTROL STATUS METRICS -->
+        <div class="ttss-mainframe-header">
+            <div class="ttss-meta-badge">
+                <i class='bx bx-anchor ttss-spin-icon'></i> PT TTSS FLEET MANAGEMENT CONTROL
+            </div>
+            <h2>Interactive 3D Structural & Ship Particulars</h2>
+            <p>Pilih armada di dock bawah untuk memuat model lambung kapal. Klik komponen internal untuk *Zoom-In* dan membedah dokumen spesifikasi teknis.</p>
+        </div>
+
+        <div class="ttss-dashboard-grid">
+            
+            <!-- SISI KIRI: LEMBAR PRINT OUT SHIP PARTICULARS -->
+            <div class="ttss-blueprint-panel">
+                <div class="ttss-sticky-wrapper">
+                    <div class="ttss-panel-controls">
+                        <button id="btn-reset-camera" class="ttss-action-btn disabled" onclick="resetVesselView()">
+                            <i class='bx bx-scan'></i> Reset Orbit Kamera
+                        </button>
+                    </div>
+
+                    <!-- Tampilan Instruksi Awal -->
+                    <div id="instruction-screen" class="ttss-instruction-box">
+                        <div class="radar-scan-effect"></div>
+                        <i class='bx bx-radar ttss-radar-pulse'></i>
+                        <h4>MONITORING SISTEM READY</h4>
+                        <p>Pilih salah satu armada di dock bawah, kemudian klik area **Bridge**, **Tangki Kargo**, atau **Kamar Mesin** untuk membedah data logistik internal.</p>
+                    </div>
+
+                    <!-- Lembar Dokumen Dinamis -->
+                    <div id="particular-document" class="ttss-document-sheet hidden">
+                        <div class="ttss-doc-watermark">PT TTSS</div>
+                        <div class="ttss-doc-header">
+                            <span id="doc-comp-tag" class="doc-tag">SPEC CATEGORY</span>
+                            <h3 id="doc-comp-title">Structure Nomenclature</h3>
+                            <div class="ttss-vessel-identity-lbl">ARMADA: <span id="doc-vessel-name">SPOB TUJUH TUNAS</span></div>
+                        </div>
+                        
+                        <div class="ttss-doc-body">
+                            <table id="doc-table-data" class="ttss-doc-table">
+                                <!-- Data Di-inject Lewat JavaScript -->
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SISI KANAN: KANVAS UTAMA 3D & TACTICAL NAVIGATION DOCK 4 KAPAL -->
+            <div class="ttss-viewport-and-dock-side">
+                
+                <!-- KANVAS PERSPEKTIF 3D -->
+                <div class="ttss-canvas-container" id="canvas-frame">
+                    <div class="ttss-canvas-telemetry">
+                        <span class="telemetry-node">SYS_STATUS: <span class="txt-neon-green">ONLINE</span></span>
+                        <span class="telemetry-node">ACTIVE_MODEL: <span id="telemetry-vessel" class="txt-neon-blue">SPOB TUJUH TUNAS</span></span>
+                    </div>
+                    
+                    <div class="ttss-orbit-space" id="orbit-space-3d">
+                        <!-- Model Utama Lambung Kapal SPOB -->
+                        <div class="ttss-vessel-structural-hull" id="vessel-hull-matrix">
+                            
+                            <!-- UNIT BURITAN: BRIDGE & ACCOMMODATION -->
+                            <div class="ttss-structural-cell cell-bridge" id="cell-bridge" onclick="triggerComponentFocus('bridge')">
+                                <span class="cell-tooltip">BRIDGE (DECKHOUSE)</span>
+                                <div class="box-mesh-3d">
+                                    <div class="mesh-face m-top"></div>
+                                    <div class="mesh-face m-front"></div>
+                                    <div class="mesh-face m-side"></div>
+                                </div>
+                            </div>
+
+                            <!-- UNIT TENGAH: CARGO TANKS COMPARTMENT -->
+                            <div class="ttss-structural-cell cell-cargo" id="cell-cargo" onclick="triggerComponentFocus('cargo')">
+                                <span class="cell-tooltip">CARGO HOLD (205 TON)</span>
+                                <div class="box-mesh-3d">
+                                    <div class="mesh-face m-top"></div>
+                                    <div class="mesh-face m-front"></div>
+                                    <div class="mesh-face m-side"></div>
+                                </div>
+                            </div>
+
+                            <!-- UNIT HALUAN: PROPULSION ENGINE ROOM -->
+                            <div class="ttss-structural-cell cell-engine" id="cell-engine" onclick="triggerComponentFocus('engine')">
+                                <span class="cell-tooltip">MAIN ENGINE ROOM</span>
+                                <div class="box-mesh-3d">
+                                    <div class="mesh-face m-top"></div>
+                                    <div class="mesh-face m-front"></div>
+                                    <div class="mesh-face m-side"></div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- LEGENDA WARNA STRUKTUR -->
+                    <div class="ttss-canvas-legends">
+                        <span class="lg-node"><span class="lg-square bg-cyan"></span> Bridge Deck</span>
+                        <span class="lg-node"><span class="lg-square bg-green"></span> Cargo Hold</span>
+                        <span class="lg-node"><span class="lg-square bg-red"></span> Engine Space</span>
+                    </div>
+                </div>
+
+                <!-- TACTICAL NAVIGATION DOCK (PEMILIH 4 KAPAL) -->
+                <div class="ttss-tactical-dock">
+                    <div class="dock-label">TACTICAL FLEET DOCK SELECTOR</div>
+                    <div class="dock-row-grid">
+                        
+                        <!-- Kapal 1 -->
+                        <div class="dock-item-btn active" data-ship="tujuh-tunas" onclick="switchVesselModel('tujuh-tunas')">
+                            <div class="dock-status-light s-ready"></div>
+                            <div class="dock-item-meta">
+                                <strong>SPOB Tujuh Tunas</strong>
+                                <span>300 KL • Ready</span>
+                            </div>
+                            <i class='bx bx-chevron-right dock-arrow'></i>
+                        </div>
+
+                        <!-- Kapal 2 -->
+                        <div class="dock-item-btn" data-ship="bmp-1" onclick="switchVesselModel('bmp-1')">
+                            <div class="dock-status-light s-ready"></div>
+                            <div class="dock-item-meta">
+                                <strong>BMP I</strong>
+                                <span>270 KL • Ready</span>
+                            </div>
+                            <i class='bx bx-chevron-right dock-arrow'></i>
+                        </div>
+
+                        <!-- Kapal 3 -->
+                        <div class="dock-item-btn" data-ship="aqsha-yali" onclick="switchVesselModel('aqsha-yali')">
+                            <div class="dock-status-light s-ready"></div>
+                            <div class="dock-item-meta">
+                                <strong>Aqsha Yali Yali</strong>
+                                <span>175 KL • Ready</span>
+                            </div>
+                            <i class='bx bx-chevron-right dock-arrow'></i>
+                        </div>
+
+                        <!-- Kapal 4 -->
+                        <div class="dock-item-btn" data-ship="dian-yuspa" onclick="switchVesselModel('dian-yuspa')">
+                            <div class="dock-status-light s-booked"></div>
+                            <div class="dock-item-meta">
+                                <strong>Dian Yuspa</strong>
+                                <span>150 KL • Booked</span>
+                            </div>
+                            <i class='bx bx-chevron-right dock-arrow'></i>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
     <!-- VISI MISI SECTION (MODERN BENTO LAYOUT) -->
     <section class="section-padding bg-dark-navy text-white" id="visi-misi">
         <div class="container">
@@ -289,6 +447,201 @@
         </div>
     </section>
     <!-- WHY CHOOSE US END -->
+
+    
+
+    <section class="ttss-dashboard-wrapper">
+    <!-- Ambient Glow Effects -->
+    <div class="ttss-ambient-glow ttss-ambient-glow--1"></div>
+    <div class="ttss-ambient-glow ttss-ambient-glow--2"></div>
+
+    <div class="ttss-inner-container">
+        
+        <!-- Section Header -->
+        <div class="ttss-dashboard-header">
+            <span class="ttss-sub-badge">
+                <i class='bx bx-anchor ttss-icon-spin'></i> Maritime Digital Hub
+            </span>
+            <h2 class="ttss-main-title">Sistem Operasional &amp; Manajemen Fleet</h2>
+            <p class="ttss-header-desc">Simulasi logistik transparan, kendali utilitas armada, dan pengajuan dokumen legalitas komersial dalam satu integrasi platform korporat.</p>
+        </div>
+
+        <!-- Dashboard Main Grid Layout -->
+        <div class="ttss-dashboard-grid">
+            
+            <!-- KARTU 1: LIVE FREIGHT CALCULATOR (WITH MULTI-CURRENCY) -->
+            <div class="ttss-card">
+                <div class="ttss-card-body">
+                    <div class="ttss-card-header-flex">
+                        <div class="ttss-icon-indicator ttss-icon-indicator--cyan">
+                            <i class='bx bx-calculator'></i>
+                        </div>
+                        <!-- Currency Switcher Toggle -->
+                        <div class="ttss-currency-toggle">
+                            <button id="btn-currency-idr" class="ttss-currency-btn ttss-currency-btn--active">IDR</button>
+                            <button id="btn-currency-usd" class="ttss-currency-btn">USD</button>
+                        </div>
+                    </div>
+                    <h3 class="ttss-card-title">Simulasi Freight Rate</h3>
+                    <p class="ttss-card-text">Estimasi kalkulasi tarif pengiriman liquid cargo berdasarkan volume riil muatan kiloliter Anda.</p>
+                    
+                    <div class="ttss-form-group">
+                        <div class="ttss-input-wrapper ttss-input-wrapper--select">
+                            <label class="ttss-form-label"><i class='bx bx-category-alt'></i> TIPE LIQUID CARGO</label>
+                            <select id="calc-cargo" class="ttss-form-select">
+                                <option value="hsd">HSD (High Speed Diesel) / Solar</option>
+                                <option value="mfo">MFO (Marine Fuel Oil)</option>
+                                <option value="bbf">BBM Premium / Pertalite</option>
+                            </select>
+                        </div>
+                        
+                        <div class="ttss-input-wrapper">
+                            <label class="ttss-form-label"><i class='bx bx-cylinder'></i> TOTAL VOLUME (KILOLITER / KL)</label>
+                            <div class="ttss-input-unit-container">
+                                <input type="number" id="calc-volume" class="ttss-form-input" value="150" min="10" max="300">
+                                <span class="ttss-form-input-unit">KL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ttss-card-footer">
+                    <div id="calc-result" class="ttss-result-container">
+                        <span class="ttss-result-title">ESTIMASI TARIF LOGISTIK</span>
+                        <div class="ttss-result-flex">
+                            <span id="result-price" class="ttss-result-amount">Rp 18.000.000</span>
+                            <span class="ttss-tax-badge">Exc. PPN</span>
+                        </div>
+                    </div>
+                    <!-- Action Button Row -->
+                    <div class="ttss-btn-group-row">
+                        <button id="btn-hitung-freight" class="ttss-btn ttss-btn--primary-neon">
+                            <span>Hitung Rate</span> <i class='bx bx-right-arrow-alt'></i>
+                        </button>
+                        <button id="btn-download-rate" class="ttss-btn ttss-btn--icon-only" title="Unduh Nota Estimasi">
+                            <i class='bx bx-download'></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KARTU 2: FLEET MONITOR & TRACKING (WITH LIVE SEARCH FILTER) -->
+            <div class="ttss-card">
+                <div class="ttss-card-body">
+                    <div class="ttss-icon-indicator ttss-icon-indicator--blue">
+                        <i class='bx bx-bar-chart-square'></i>
+                    </div>
+                    <h3 class="ttss-card-title">Utilitas Real-time Fleet</h3>
+                    <p class="ttss-card-text">Status penyerapan kontrak sewa operasional berkala dan ketersediaan pasar spot muatan minyak.</p>
+                    
+                    <!-- Progress Bar Utama -->
+                    <div class="ttss-progress-card">
+                        <div class="ttss-progress-info">
+                            <span>Rasio Utilitas Aktif</span>
+                            <span class="ttss-progress-val">75%</span>
+                        </div>
+                        <div class="ttss-progress-track">
+                            <div class="ttss-progress-bar" style="width: 75%;"></div>
+                        </div>
+                    </div>
+
+                    <!-- Live Search Fleet Control -->
+                    <div class="ttss-search-wrapper">
+                        <i class='bx bx-search ttss-search-icon'></i>
+                        <input type="text" id="fleet-search-input" class="ttss-form-input ttss-form-input--search" placeholder="Cari nama kapal/status...">
+                    </div>
+
+                    <!-- Daftar Mini Manifestasi Kapal -->
+                    <div id="fleet-list-container" class="ttss-status-list">
+                        <div class="ttss-status-row" data-vessel="spob tujuh tunas available">
+                            <div class="ttss-vessel-meta">
+                                <span class="ttss-status-dot ttss-pulse-effect"></span>
+                                <div>
+                                    <strong class="ttss-vessel-name">SPOB Tujuh Tunas</strong>
+                                    <small class="ttss-vessel-specs">300 KL • Ready / Spot Market</small>
+                                </div>
+                            </div>
+                            <span class="ttss-row-badge ttss-row-badge--green">Available</span>
+                        </div>
+                        <div class="ttss-status-row" data-vessel="bmp i available">
+                            <div class="ttss-vessel-meta">
+                                <span class="ttss-status-dot ttss-pulse-effect"></span>
+                                <div>
+                                    <strong class="ttss-vessel-name">BMP I</strong>
+                                    <small class="ttss-vessel-specs">270 KL • Ready / Spot Market</small>
+                                </div>
+                            </div>
+                            <span class="ttss-row-badge ttss-row-badge--green">Available</span>
+                        </div>
+                        <div class="ttss-status-row" data-vessel="aqsha yali yali available">
+                            <div class="ttss-vessel-meta">
+                                <span class="ttss-status-dot ttss-pulse-effect"></span>
+                                <div>
+                                    <strong class="ttss-vessel-name">Aqsha Yali Yali</strong>
+                                    <small class="ttss-vessel-specs">175 KL • Ready / Spot Market</small>
+                                </div>
+                            </div>
+                            <span class="ttss-row-badge ttss-row-badge--green">Available</span>
+                        </div>
+                        <div class="ttss-status-row" data-vessel="dian yuspa on charter">
+                            <div class="ttss-vessel-meta">
+                                <span class="ttss-status-dot ttss-status-dot--orange"></span>
+                                <div>
+                                    <strong class="ttss-vessel-name">Dian Yuspa</strong>
+                                    <small class="ttss-vessel-specs">150 KL • Time Charter Contracts</small>
+                                </div>
+                            </div>
+                            <span class="ttss-row-badge ttss-row-badge--orange">On Charter</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ttss-card-footer">
+                    <button id="btn-scroll-fleet" class="ttss-btn ttss-btn--secondary-outline">
+                        <i class='bx bx-navigation'></i> Lihat Detail Posisi Kapal
+                    </button>
+                </div>
+            </div>
+
+            <!-- KARTU 3: SHIP PARTICULARS LOGISTICS CENTER -->
+            <div class="ttss-card">
+                <div class="ttss-card-body">
+                    <div class="ttss-icon-indicator ttss-icon-indicator--purple">
+                        <i class='bx bx-folder-open'></i>
+                    </div>
+                    <h3 class="ttss-card-title">Pusat Data Particulars</h3>
+                    <p class="ttss-card-text">Dapatkan berkas spesifikasi teknis tangki lambung, kapasitas pompa bongkar, dan regulasi kelas kapal.</p>
+                    
+                    <div class="ttss-form-group">
+                        <div class="ttss-input-wrapper ttss-input-wrapper--select">
+                            <label class="ttss-form-label"><i class='bx bx-ship'></i> PILIH ARMADA KAPAL</label>
+                            <select id="request-particular-vessel" class="ttss-form-select">
+                                <option value="SPOB Tujuh Tunas">SPOB Tujuh Tunas (300 KL)</option>
+                                <option value="BMP I">BMP I (270 KL)</option>
+                                <option value="Aqsha Yali Yali">Aqsha Yali Yali (175 KL)</option>
+                                <option value="Dian Yuspa">Dian Yuspa (150 KL)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="ttss-notice-box">
+                        <i class='bx bx-info-circle'></i>
+                        <span>Dokumen resmi akan diverifikasi oleh departemen komersial kantor pusat dan dikirim instan dalam bentuk format PDF terenkripsi.</span>
+                    </div>
+                </div>
+
+                <div class="ttss-card-footer">
+                    <button id="btn-request-particulars" class="ttss-btn ttss-btn--purple-gradient">
+                        <i class='bx bxl-whatsapp'></i> <span>Request Dokumen via WA</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
 <!-- ==========================================
      SECTION: LEGALITAS (PREMIUM CORPORATE GRID)
      ========================================== -->
@@ -480,6 +833,7 @@
      SECTION: DOKUMEN END
      ========================================== -->
 
+     
 
 <div class="garis"></div>
 
@@ -628,6 +982,109 @@
         </div>
     </section>
     <!-- OPERATIONAL WORKFLOW END -->
+
+    <section class="ttss-iso-container">
+    <div class="ttss-iso-card">
+        <div class="ttss-iso-split-layout">
+            
+            <!-- SISI KIRI: PANEL KONTROL KARGO -->
+            <div class="ttss-iso-control-side">
+                <div class="ttss-iso-badge">
+                    <i class='bx bx-cube ttss-pulse-icon'></i> 3D DECK SIMULATOR V1
+                </div>
+                <h3 class="ttss-iso-title">Iso-Deck Cargo Monitor</h3>
+                <p class="ttss-iso-desc">Visualisasi kompartemen tangki ganda (Double Hull) armada SPOB secara isometrik transparan untuk monitoring volume kargo cair.</p>
+                
+                <div class="ttss-iso-form-group">
+                    <!-- Selektor Kompartemen -->
+                    <div class="ttss-iso-input-wrapper">
+                        <label class="ttss-iso-label"><i class='bx bx-target-lock'></i> FOKUS KOMPARTEMEN</label>
+                        <select id="iso-tank-select" class="ttss-iso-select">
+                            <option value="all">Semua Kompartemen (Simultan)</option>
+                            <option value="tk1">Tangki 1 - Port (Premium)</option>
+                            <option value="tk2">Tangki 2 - Starboard (Solar)</option>
+                        </select>
+                    </div>
+
+                    <!-- Slider Pengatur Tinggi Cairan -->
+                    <div class="ttss-iso-input-wrapper">
+                        <div class="ttss-iso-slider-header">
+                            <label class="ttss-iso-label"><i class='bx bx-line-chart'></i> PENGISIAN VOLUME</label>
+                            <span id="lbl-iso-pct" class="ttss-iso-pct-badge">65%</span>
+                        </div>
+                        <input type="range" id="iso-volume-slider" class="ttss-iso-slider" min="0" max="100" value="65">
+                    </div>
+
+                    <!-- Monitor Angka Taktis -->
+                    <div class="ttss-iso-stats-grid">
+                        <div class="ttss-iso-stat-item">
+                            <span class="ttss-stat-lbl">TOTAL CARGO ON BOARD</span>
+                            <strong id="lbl-iso-total-kl">195.0 KL</strong>
+                        </div>
+                        <div class="ttss-iso-stat-item">
+                            <span class="ttss-stat-lbl">ULLAGE AVERAGE</span>
+                            <strong id="lbl-iso-ullage">1,750 mm</strong>
+                        </div>
+                        <div class="ttss-iso-stat-item">
+                            <span class="ttss-stat-lbl">STABILITAS TRIM</span>
+                            <strong class="ttss-stat-value status-green">0.2 m (NORMAL)</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SISI KANAN: SIMULATOR KAPAL 3D ISOMETRIK TRANSPARAN -->
+            <div class="ttss-iso-visual-side">
+                <div class="ttss-iso-scene">
+                    
+                    <!-- REPLIKA LAMBUNG KAPAL ISOMETRIK TRANSPARAN -->
+                    <div class="ttss-iso-vessel-hull">
+                        
+                        <!-- Struktur Tangki 1 (Sisi Kiri/Port) -->
+                        <div class="ttss-iso-tank-block" id="iso-tank-1">
+                            <div class="ttss-tank-label-3d">TK 1 - PORT</div>
+                            <!-- Kubus Cairan di Dalam Tangki -->
+                            <div class="ttss-cube-fluid" id="fluid-cube-1" style="--fluid-height: 65%;">
+                                <div class="face top"></div>
+                                <div class="face front"></div>
+                                <div class="face side"></div>
+                            </div>
+                            <!-- Kerangka Transparan Luar Tangki -->
+                            <div class="ttss-cube-wireframe">
+                                <div class="face-wire top"></div>
+                                <div class="face-wire front"></div>
+                                <div class="face-wire side"></div>
+                            </div>
+                        </div>
+
+                        <!-- Struktur Tangki 2 (Sisi Kanan/Starboard) -->
+                        <div class="ttss-iso-tank-block" id="iso-tank-2">
+                            <div class="ttss-tank-label-3d">TK 2 - STBD</div>
+                            <!-- Kubus Cairan di Dalam Tangki -->
+                            <div class="ttss-cube-fluid" id="fluid-cube-2" style="--fluid-height: 65%;">
+                                <div class="face top"></div>
+                                <div class="face front"></div>
+                                <div class="face side"></div>
+                            </div>
+                            <!-- Kerangka Transparan Luar Tangki -->
+                            <div class="ttss-cube-wireframe">
+                                <div class="face-wire top"></div>
+                                <div class="face-wire front"></div>
+                                <div class="face-wire side"></div>
+                            </div>
+                        </div>
+
+                    </div> <!-- End Vessel Hull -->
+                    
+                    <!-- Label Navigasi Deck -->
+                    <div class="ttss-deck-axis axis-bow">HALUAN (BOW)</div>
+                    <div class="ttss-deck-axis axis-stern">BURITAN (STERN)</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
 
     <!-- CTA SECTION -->
     <section class="section-padding bg-gradient-blue text-white text-center">
